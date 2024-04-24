@@ -1,12 +1,16 @@
 from django.shortcuts import render
 
 
-def home_page(request):
+def home(request):
     """Контроллер для отображения домашней страницы."""
     # products = Product.objects.all()
-    return render(request, 'home.html')
+    return render(request, 'myproject/templates/home.html')
 
 
-def contact_page(request):
+def contact(request):
     """Контроллер для отображения страницы с контактной информацией."""
-    return render(request, 'contact.html')
+    return render(request, 'myproject/templates/contact.html')
+
+
+def catalog(request):
+    return render(request, 'myproject/templates/catalog.html')
