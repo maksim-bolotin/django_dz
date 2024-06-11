@@ -2,7 +2,7 @@ asgiref==3.8.1
 asttokens==2.4.1
 colorama==0.4.6
 decorator==5.1.1
-Django==5.0.4
+Django~=5.0.3
 executing==2.0.1
 ipython==8.24.0
 jedi==0.19.1
@@ -19,3 +19,11 @@ stack-data==0.6.3
 traitlets==5.14.3
 tzdata==2024.1
 wcwidth==0.2.13
+pip~=23.2.1
+DateTime~=5.2
+filelock~=3.13.1
+requests~=2.31.0
+pytils~=0.4.1
+pytest~=7.4.3
+packaging~=23.2
+setuptools~=69.5.1
