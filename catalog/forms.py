@@ -1,5 +1,5 @@
 from django import forms
-from catalog.models import Product
+from catalog.models import Product, Version
 
 
 class ProductForm(forms.ModelForm):
@@ -14,3 +14,9 @@ class ProductForm(forms.ModelForm):
             if word in cleaned_data:
                 raise forms.ValidationError('Запрещенное слово в названии')
             return cleaned_data
+
+
+class VersionForm(forms.ModelForm):
+    class Meta:
+        model = Version
+        fields = '__all__'

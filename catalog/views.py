@@ -1,8 +1,9 @@
+from django.forms import inlineformset_factory
 from django.shortcuts import render
 from django.urls import reverse_lazy, reverse
-from catalog.models import Category, Product
+from catalog.models import Category, Product, Version
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from catalog.forms import ProductForm
+from catalog.forms import ProductForm, VersionForm
 
 
 class ProductCreateView(CreateView):
@@ -28,6 +29,15 @@ class ProductUpdateView(UpdateView):
 
     def get_success_url(self):
         return reverse('products:detail', args=[self.kwargs.get('pk')])
+
+    def get_context_data(self, **kwargs):
+        context_data = super().get_context_data(**kwargs)
+        VersionFormset = inlineformset_factory(Product, Version, form=VersionForm, extra=1)
+        if self.request.method == 'POST':
+            context_data['formset'] = VersionFormset(self.request.POST, instance=self.object)
+        else:
+            context_data['formset'] = VersionFormset(instance=self.object)
+        return context_data
 
 
 class ProductDeleteView(DeleteView):
