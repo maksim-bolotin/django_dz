@@ -55,7 +55,7 @@ def home(request):
     return render(request, 'catalog/home.html', context)
 
 
-def contact(request):
+def contacts(request):
     """Контроллер для отображения страницы с контактной информацией."""
     if request.method == 'POST':
         name = request.POST.get('name')
@@ -65,7 +65,7 @@ def contact(request):
     context = {
         'title': 'Обратная связь'
     }
-    return render(request, 'catalog/contact.html', context)
+    return render(request, 'catalog/contacts.html', context)
 
 
 def index(request):
