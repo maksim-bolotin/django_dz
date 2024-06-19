@@ -9,7 +9,7 @@ from catalog.forms import ProductForm, VersionForm
 class ProductCreateView(CreateView):
     model = Product
     form_class = ProductForm
-    success_url = reverse_lazy('catalog:list')
+    success_url = reverse_lazy('catalog:products')
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -39,10 +39,10 @@ class ProductDetailView(DetailView):
 class ProductUpdateView(UpdateView):
     model = Product
     form_class = ProductForm
-    success_url = reverse_lazy('catalog:list')
+    success_url = reverse_lazy('catalog:products')
 
     def get_success_url(self):
-        return reverse('products:detail', args=[self.kwargs.get('pk')])
+        return reverse('catalog:product', args=[self.kwargs.get('pk')])
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -64,7 +64,7 @@ class ProductUpdateView(UpdateView):
 
 class ProductDeleteView(DeleteView):
     model = Product
-    success_url = reverse_lazy('catalog:list')
+    success_url = reverse_lazy('catalog:products')
 
 
 def home(request):
