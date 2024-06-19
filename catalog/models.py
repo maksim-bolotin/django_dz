@@ -6,6 +6,7 @@ NULLABLE = {'blank': True, 'null': True}
 class Category(models.Model):
     category_name = models.CharField(max_length=100, verbose_name='Наименование')
     category_description = models.TextField(verbose_name='Описание', **NULLABLE)
+    category_image = models.ImageField(upload_to='image/', verbose_name='Изображение категории', **NULLABLE)
 
     def __str__(self):
         return f'{self.category_name}, {self.category_description}'
