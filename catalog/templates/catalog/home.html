@@ -13,9 +13,7 @@
                         <ul class="list-unstyled mt-3 mb-4 text-start m-3">
                             <li>- {{ object.category_description }}</li>
                         </ul>
-                        <button type="button" class="btn btn-lg btn-block btn-outline-primary" href="/contacts/">
-                            Купить
-                        </button>
+                         <a href="{% url 'products:products_by_category' object.pk %}" class="btn btn-lg btn-block btn-outline-primary">Смотреть товары</a>
                     </div>
                 </div>
             </div>
