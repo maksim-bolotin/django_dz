@@ -20,6 +20,17 @@ class ProductCreateView(CreateView):
             context_data['formset'] = VersionFormset()
         return context_data
 
+    def form_valid(self, form):
+        context_data = self.get_context_data()
+        formset = context_data['formset']
+        if formset.is_valid():
+            self.object = form.save()
+            formset.instance = self.object
+            formset.save()
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
+
 
 class ProductListView(ListView):
     model = Product
@@ -28,7 +39,7 @@ class ProductListView(ListView):
 
 class ProductDetailView(DetailView):
     model = Product
-    template_name = 'catalog/product.html'
+    template_name = 'catalog/products_detail.html'
 
     def get_context_data(self, **kwargs):
         context_data = super().get_context_data(**kwargs)
@@ -54,17 +65,31 @@ class ProductUpdateView(UpdateView):
         return context_data
 
     def form_valid(self, form):
-        formset = self.get_context_data()['formset']
-        self.object = form.save()
+        context_data = self.get_context_data()
+        formset = context_data['formset']
         if formset.is_valid():
+            self.object = form.save()
             formset.instance = self.object
             formset.save()
-        return super().form_valid(form)
+            return super().form_valid(form)
+        else:
+            return self.form_invalid(form)
 
 
 class ProductDeleteView(DeleteView):
     model = Product
     success_url = reverse_lazy('catalog:products')
+    template_name = 'catalog/products_confirm_delete.html'
+
+
+class ProductListByCategoryView(ListView):
+    model = Product
+    template_name = 'catalog/products_by_category.html'
+    context_object_name = 'products'
+
+    def get_queryset(self):
+        category_id = self.kwargs['category_id']
+        return Product.objects.filter(product_category_id=category_id)
 
 
 def home(request):
