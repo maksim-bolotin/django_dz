@@ -6,7 +6,8 @@ class StyleFormMixin:
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         for fild_name, field in self.fields.items():
-            field.widget.attrs['class'] = 'form-control'
+            if fild_name != "version_sign":
+                field.widget.attrs['class'] = 'form-control'
 
 
 class ProductForm(StyleFormMixin, forms.ModelForm):
@@ -24,6 +25,8 @@ class ProductForm(StyleFormMixin, forms.ModelForm):
 
 
 class VersionForm(StyleFormMixin, forms.ModelForm):
+    version_sign = forms.BooleanField(label='Активная версия', required=False)
+
     class Meta:
         model = Version
         fields = '__all__'
