@@ -1,5 +1,6 @@
 {% extends 'catalog/base.html' %}
 {% load media %}
+{% load custom_tags %}
 
 {% block content %}
 <html lang="en">
@@ -12,8 +13,11 @@
         <div class="col-3">
                 <h1 class="card-title pricing-card-title">{{ object.product_name }}</h1>
                 <ul class="list-unstyled mt-3 mb-4 text-start m-3">
-                    <img class="card-img-top" src="{{ object.product_image.url }}" alt="{{ object.product_name }}">
-
+                    {% with image_url=object.product_image|safe_image_url %}
+                        {% if image_url %}
+                            <img class="card-img-top" src="{{ image_url }}" alt="{{ object.product_name }}">
+                        {% endif %}
+                    {% endwith %}
                 </ul>
             <a href="{% url 'products:product' object.pk %}" class="btn mt-2 btn-lg btn-block  btn-outline-primary"
                style="--bs-btn-padding-y: 3.0rem; --bs-btn-padding-x: 5.0rem; --bs-btn-font-size: 1.0rem;">Детали</a>
