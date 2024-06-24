@@ -36,12 +36,6 @@
                             {% for form in formset.forms %}
                                 <div class="form-group">
                                     {{ form.as_p }}
-                                    <div class="form-check">
-                                        {{ form.version_sign }}
-                                        <label class="form-check-label" for="{{ form.prefix }}-version_sign">
-                                            Активная версия
-                                        </label>
-                                    </div>
                                 </div>
                             {% endfor %}
                         </div>
